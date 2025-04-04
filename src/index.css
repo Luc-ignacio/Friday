@@ -1,0 +1,16 @@
+@import "tailwindcss";
+
+#root {
+  background-image: url('/bg-image.webp');
+  background-size: cover;
+  width: 100%;
+  color: white;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  display: flex;
+  margin-left: auto;
+  margin-right: auto;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+}
