@@ -104,11 +104,7 @@ function Login() {
           customStyle={`mt-6 w-[90%] mx-auto`}
           text="Continue With Google"
           img={
-            <img
-              src="./src/assets/google-logo.png"
-              alt="Google Logo"
-              className="w-10"
-            />
+            <img src="/google-logo.png" alt="Google Logo" className="w-10" />
           }
         />
 

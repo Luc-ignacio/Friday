@@ -158,13 +158,7 @@ function Register() {
         clicked={SignUpWithGoogle}
         customStyle={`mt-6 w-[90%] mx-auto`}
         text="Sign Up With Google"
-        img={
-          <img
-            src="./src/assets/google-logo.png"
-            alt="Google Logo"
-            className="w-10"
-          />
-        }
+        img={<img src="/google-logo.png" alt="Google Logo" className="w-10" />}
       />
 
       <div className="flex gap-1 mt-6 text-sm justify-center">
