@@ -1,9 +1,10 @@
 import React, { useState } from "react";
 import { auth, googleProvider, db } from "../firebase-config/firebase.js";
-import { toast, ToastContainer } from "react-toastify";
+import { toast } from "react-toastify";
 import { Button } from "../components/button.jsx";
 import { createUserWithEmailAndPassword, signInWithPopup } from "firebase/auth";
 import { setDoc, doc } from "firebase/firestore";
+import { Link } from "react-router-dom";
 
 function Register() {
   const [credentials, setCredentials] = useState({
@@ -57,7 +58,8 @@ function Register() {
         credentials.email,
         credentials.password
       );
-      const user = auth.currentUser;
+
+      const user = auth?.currentUser;
       if (user) {
         [
           await setDoc(doc(db, "users", user.uid), {
@@ -67,7 +69,7 @@ function Register() {
           }),
         ];
       }
-      toast.success("User created successfully");
+      toast.success("User signed up successfully");
       window.location.href = "/profile";
     } catch (error) {
       console.error("Failed to sign up", error);
@@ -78,13 +80,18 @@ function Register() {
   const SignUpWithGoogle = async () => {
     try {
       await signInWithPopup(auth, googleProvider);
-      toast.success("User created successfully");
-      setCredentials({
-        fName: "",
-        lName: "",
-        email: "",
-        password: "",
-      });
+      const user = auth?.currentUser;
+      if (user) {
+        [
+          await setDoc(doc(db, "users", user.uid), {
+            email: user.email,
+            firstName: auth?.currentUser.displayName,
+            lastName: "",
+          }),
+        ];
+      }
+      toast.success("User signed up successfully");
+      window.location.href = "/profile";
     } catch (error) {
       console.error("Failed to sign up with Google", error);
       toast.error("Failed to sign up with Google");
@@ -162,15 +169,13 @@ function Register() {
 
       <div className="flex gap-1 mt-6 text-sm justify-center">
         <p>Already have an account?</p>
-        <a
+        <Link
           className="text-[#646cff] font-semibold hover:underline"
-          href="/login"
+          to="/login"
         >
           Sign In
-        </a>
+        </Link>
       </div>
-
-      <ToastContainer />
     </div>
   );
 }

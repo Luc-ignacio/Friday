@@ -1,18 +1,32 @@
 import React from "react";
 import { useEffect, useState } from "react";
-import { db } from "../firebase-config/firebase.js";
-import { getDocs, collection, doc, deleteDoc } from "firebase/firestore";
+import { db, auth } from "../firebase-config/firebase.js";
+import {
+  getDocs,
+  collection,
+  doc,
+  deleteDoc,
+  query,
+  where,
+} from "firebase/firestore";
 import { Button } from "./button.jsx";
 import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 
 export const GetTasks = () => {
   const [tasksList, setTasksList] = useState([]);
 
+  const currentUserId = auth?.currentUser?.uid;
+
   const tasksCollectionRef = collection(db, "tasks");
+  const filteredTaskRef = query(
+    tasksCollectionRef,
+    where("createdBy", "==", currentUserId)
+  );
 
   const getTasksList = async () => {
     try {
-      const data = await getDocs(tasksCollectionRef);
+      const data = await getDocs(filteredTaskRef);
       const filteredData = data.docs.map((doc) => ({
         ...doc.data(),
         id: doc.id,
@@ -31,21 +45,19 @@ export const GetTasks = () => {
     const taskDoc = doc(db, "tasks", id);
     try {
       await deleteDoc(taskDoc);
-      getTasksList();
+      await getTasksList();
+      toast.success("Task deleted successfully!");
     } catch (error) {
       console.error("Failed to delete task", error);
+      toast.error("Failed to delete task");
     }
   };
 
   const navigate = useNavigate();
 
-  const goToEditTaskPage = (id) => {
-    navigate(`/edit-task/${id}`);
-  };
-
   return (
     <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 mt-6 text-left pb-6 border-b border-[#1a1a1a]">
-      {tasksList.length > 0 ? (
+      {tasksList?.length > 0 ? (
         tasksList.map((task) => {
           return (
             <div
@@ -70,7 +82,9 @@ export const GetTasks = () => {
                 <Button
                   text="Edit"
                   customStyle={"text-sm bg-[#343434] h-10"}
-                  clicked={() => goToEditTaskPage(task.id)}
+                  clicked={() => {
+                    window.location.href = `/edit-task/${task.id}`;
+                  }}
                 />
                 <Button
                   text="Delete"
@@ -84,8 +98,8 @@ export const GetTasks = () => {
           );
         })
       ) : (
-        <p className="col-span-3 border-b-4 border-[#646cff] w-fit text-xl font-semibold">
-          Nothing planned yet – Add something fun to get started.
+        <p className="col-span-3 border-b-2 border-[#646cff] w-fit text-xl font-semibold">
+          Nothing planned yet – Add a task to get started.
         </p>
       )}
     </div>

@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Button } from "../components/button";
 import { auth, db } from "../firebase-config/firebase.js";
 import { getDoc, doc, addDoc, collection } from "firebase/firestore";
+import { toast } from "react-toastify";
 
 function AddTask() {
   const [userDetails, setUserDetails] = useState(null);
@@ -30,22 +31,21 @@ function AddTask() {
     fetchUserData();
   }, []);
 
-  const backToLogin = () => {
-    window.location.href = "/login";
-  };
-
   const addTask = async () => {
     const newTask = {
       title: newTaskTitle,
       dueDate: newTaskDueDate,
       priority: newTaskPriority,
+      createdBy: auth?.currentUser?.uid,
     };
 
     try {
       await addDoc(tasksReference, newTask);
       window.location.href = "/profile";
+      toast.success("Task added successfully");
     } catch (error) {
-      console.error("Error adding task", error);
+      console.error("Failed to add task", error);
+      toast.error("Failed to add task");
     }
   };
 
@@ -105,32 +105,8 @@ function AddTask() {
         </div>
       </div>
     );
-  } else if (userDetails === null) {
-    return (
-      <div className="w-[500px] bg-[#343434] shadow-lg px-4 py-8 rounded-lg">
-        <div className="w-[90%] mx-auto text-center">
-          <div>
-            <h3 className="text-xl font-semibold">You are signed out</h3>
-          </div>
-
-          <Button
-            clicked={backToLogin}
-            customStyle={`mt-6 w-full`}
-            text={"Sign In"}
-          />
-        </div>
-      </div>
-    );
   } else {
-    return (
-      <div className="w-[500px] bg-[#343434] shadow-lg px-4 py-8 rounded-lg">
-        <div className="w-[90%] mx-auto text-center">
-          <div>
-            <h3 className="text-xl font-semibold">Loading your details</h3>
-          </div>
-        </div>
-      </div>
-    );
+    return <p>Loading...</p>;
   }
 }
 

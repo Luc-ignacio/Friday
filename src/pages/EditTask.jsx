@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { Button } from "../components/button.jsx";
 import { auth, db } from "../firebase-config/firebase.js";
-import { getDoc, doc, updateDoc, collection } from "firebase/firestore";
-import { useParams, useNavigate } from "react-router-dom";
+import { getDoc, doc, updateDoc } from "firebase/firestore";
+import { useParams } from "react-router-dom";
 import logo from "/friday.png";
 
 function EditTask() {
@@ -11,7 +11,6 @@ function EditTask() {
   const [newTaskDueDate, setNewTaskDueDate] = useState("");
   const [newTaskPriority, setNewTaskPriority] = useState("Low");
 
-  const tasksReference = collection(db, "tasks");
   const taskId = useParams();
 
   const fetchUserData = async () => {
@@ -33,12 +32,6 @@ function EditTask() {
     fetchUserData();
     fetchTaskData(taskId.id);
   }, []);
-
-  const navigate = useNavigate();
-
-  const backToLogin = () => {
-    navigate("/login");
-  };
 
   const [task, setTask] = useState();
 
@@ -64,8 +57,10 @@ function EditTask() {
         priority: newTaskPriority,
       });
       window.location.href = "/profile";
+      toast.success("Task edited successfully");
     } catch (error) {
       console.error("Failed to edit task", error);
+      toast.error("Failed to edit task");
     }
   };
 
@@ -130,32 +125,8 @@ function EditTask() {
         </div>
       </div>
     );
-  } else if (userDetails === null) {
-    return (
-      <div className="w-[500px] bg-[#343434] shadow-lg px-4 py-8 rounded-lg">
-        <div className="w-[90%] mx-auto text-center">
-          <div>
-            <h3 className="text-xl font-semibold">You are signed out</h3>
-          </div>
-
-          <Button
-            clicked={backToLogin}
-            customStyle={`mt-6 w-full`}
-            text={"Sign In"}
-          />
-        </div>
-      </div>
-    );
   } else {
-    return (
-      <div className="w-[500px] bg-[#343434] shadow-lg px-4 py-8 rounded-lg">
-        <div className="w-[90%] mx-auto text-center">
-          <div>
-            <h3 className="text-xl font-semibold">Loading your details</h3>
-          </div>
-        </div>
-      </div>
-    );
+    return <p>Loading...</p>;
   }
 }
 

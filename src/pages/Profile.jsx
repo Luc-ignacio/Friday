@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Button } from "../components/button";
 import { auth, db } from "../firebase-config/firebase.js";
-import { toast, ToastContainer } from "react-toastify";
+import { toast } from "react-toastify";
 import { getDoc, doc } from "firebase/firestore";
 import { GetTasks } from "../components/get-tasks.jsx";
 
@@ -10,8 +10,8 @@ function Profile() {
 
   const fetchUserData = async () => {
     try {
-      auth.onAuthStateChanged(async (user) => {
-        const docReference = doc(db, "users", user.uid);
+      auth.onAuthStateChanged(async (currentUser) => {
+        const docReference = doc(db, "users", currentUser.uid);
         const docData = await getDoc(docReference);
 
         if (docData.exists()) {
@@ -36,13 +36,6 @@ function Profile() {
       console.error("Failed to sign out", error);
       toast.error("Failed to sign out");
     }
-  };
-
-  const backToLogin = () => {
-    window.location.href = "/login";
-  };
-  const goToAddTaskPage = () => {
-    window.location.href = "/add-task";
   };
 
   if (userDetails) {
@@ -70,7 +63,9 @@ function Profile() {
 
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 pt-6">
             <Button
-              clicked={goToAddTaskPage}
+              clicked={() => {
+                window.location.href = "/add-task";
+              }}
               customStyle={`w-full`}
               text={"Add Task"}
             />
@@ -80,36 +75,11 @@ function Profile() {
               text={"Sign Out"}
             />
           </div>
-          <ToastContainer />
-        </div>
-      </div>
-    );
-  } else if (userDetails === null) {
-    return (
-      <div className="w-[500px] bg-[#343434] shadow-lg px-4 py-8 rounded-lg">
-        <div className="w-[90%] mx-auto text-center">
-          <div>
-            <h3 className="text-xl font-semibold">You are signed out</h3>
-          </div>
-
-          <Button
-            clicked={backToLogin}
-            customStyle={`mt-6 w-full`}
-            text={"Sign In"}
-          />
         </div>
       </div>
     );
   } else {
-    return (
-      <div className="w-[500px] bg-[#343434] shadow-lg px-4 py-8 rounded-lg">
-        <div className="w-[90%] mx-auto text-center">
-          <div>
-            <h3 className="text-xl font-semibold">Loading your details</h3>
-          </div>
-        </div>
-      </div>
-    );
+    return <p>Loading...</p>;
   }
 }
 

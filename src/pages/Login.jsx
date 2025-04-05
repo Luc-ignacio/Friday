@@ -1,8 +1,9 @@
 import React, { useState } from "react";
-import { auth } from "../firebase-config/firebase.js";
-import { toast, ToastContainer } from "react-toastify";
+import { auth, googleProvider } from "../firebase-config/firebase.js";
+import { toast } from "react-toastify";
 import { Button } from "../components/button.jsx";
-import { signInWithEmailAndPassword } from "firebase/auth";
+import { signInWithEmailAndPassword, signInWithPopup } from "firebase/auth";
+import { Link } from "react-router-dom";
 
 function Login() {
   const [credentials, setCredentials] = useState({
@@ -37,7 +38,6 @@ function Login() {
         credentials.password
       );
       window.location.href = "/profile";
-      const user = auth.currentUser;
       toast.success("User signed in successfully");
     } catch (error) {
       console.error("Failed to sign in", error);
@@ -45,21 +45,16 @@ function Login() {
     }
   };
 
-  // const SignUpWithGoogle = async () => {
-  //   try {
-  //     await signInWithPopup(auth, googleProvider);
-  //     toast.success("User created successfully");
-  //     setCredentials({
-  //       fName: "",
-  //       lName: "",
-  //       email: "",
-  //       password: "",
-  //     });
-  //   } catch (error) {
-  //     console.error("Failed to sign up with Google", error);
-  //     toast.error("Failed to sign up with Google");
-  //   }
-  // };
+  const SignUpWithGoogle = async () => {
+    try {
+      await signInWithPopup(auth, googleProvider);
+      window.location.href = "/profile";
+      toast.success("User signed in successfully");
+    } catch (error) {
+      console.error("Failed to sign in with Google", error);
+      toast.error("Failed to sign in with Google");
+    }
+  };
 
   return (
     <div className="w-[500px]">
@@ -95,38 +90,37 @@ function Login() {
             className={"bg-gray-300 text-black px-2 py-1 rounded-lg mb-6"}
             placeholder="Password"
           />
-          {/* <div className="flex flex-1 pb-6 border-b border-[#1a1a1a] relative"> */}
-          <Button customStyle={`flex flex-1 justify-center`} text="Sign In" />
-          {/* <p className="absolute px-4 top-5/6 left-1/2 transform -translate-x-1/2 bg-[#343434] text-sm">
-            OR
-          </p> */}
-          {/* </div> */}
+
+          <div className="flex flex-1 pb-6 border-b border-[#1a1a1a] relative">
+            <Button customStyle={`flex flex-1 justify-center`} text="Sign In" />
+            <p className="absolute px-4 top-5/6 left-1/2 transform -translate-x-1/2 bg-[#343434] text-sm">
+              OR
+            </p>
+          </div>
         </form>
+
+        <Button
+          clicked={SignUpWithGoogle}
+          customStyle={`mt-6 w-[90%] mx-auto`}
+          text="Continue With Google"
+          img={
+            <img
+              src="./src/assets/google-logo.png"
+              alt="Google Logo"
+              className="w-10"
+            />
+          }
+        />
 
         <div className="flex gap-1 mt-6 text-sm justify-center">
           <p>Don't have an account?</p>
-          <a
+          <Link
             className="text-[#646cff] font-semibold hover:underline"
-            href="/register"
+            to="/register"
           >
             Sign Up
-          </a>
+          </Link>
         </div>
-
-        {/* <Button
-        clicked={SignUpWithGoogle}
-        customStyle={`mt-6 w-full`}
-        text="Sign In With Google"
-        img={
-          <img
-            src="./src/assets/google-logo.png"
-            alt="Google Logo"
-            className="w-10"
-          />
-        }
-      /> */}
-
-        <ToastContainer />
       </div>
     </div>
   );

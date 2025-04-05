@@ -8,6 +8,7 @@ import { auth } from "./firebase-config/firebase";
 import RedirectLogin from "./components/redirect-login";
 import AddTask from "./pages/AddTask";
 import EditTask from "./pages/EditTask";
+import { NotFound } from "./pages/NotFound";
 
 function AppRouter() {
   const [user, setUser] = useState();
@@ -51,6 +52,10 @@ function AppRouter() {
     {
       path: "/edit-task/:id",
       element: <EditTask />,
+    },
+    {
+      path: "*",
+      element: <NotFound />,
     },
   ]);
 
