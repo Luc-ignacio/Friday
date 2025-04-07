@@ -99,7 +99,7 @@ function Register() {
   };
 
   return (
-    <div className="w-[500px] bg-[#343434] shadow-lg px-4 py-8 rounded-lg">
+    <div className="w-[95vw] md:w-[500px] bg-[#343434] shadow-lg px-4 py-8 rounded-lg">
       <div className="flex w-full items-center justify-center gap-5 pb-6 border-b border-[#1a1a1a]">
         <img src="/friday.png" alt="friday logo" className="w-16" />
         <div>
@@ -108,7 +108,7 @@ function Register() {
       </div>
 
       <form
-        className="flex flex-col w-[90%] mx-auto pt-6 text-center"
+        className="flex flex-col w-[95%] mx-auto pt-6 text-center"
         onSubmit={SignUpWithEmail}
       >
         <h1 className="text-xl font-semibold">Get Started</h1>
@@ -156,7 +156,7 @@ function Register() {
 
       <Button
         clicked={SignUpWithGoogle}
-        customStyle={`mt-6 w-[90%] mx-auto`}
+        customStyle={`mt-6 w-[95%] mx-auto`}
         text="Sign Up With Google"
         img={<img src="/google-logo.png" alt="Google Logo" className="w-10" />}
       />

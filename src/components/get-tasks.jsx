@@ -65,7 +65,7 @@ export const GetTasks = () => {
               className="flex justify-between items-center rounded-lg px-4 py-8 bg-[#1a1a1a] col-span-1"
             >
               <div className="w-full">
-                <h2 className="text-lg">
+                <h2 className="md:text-lg">
                   <b>Title: </b>
                   {task.title}
                 </h2>
@@ -98,7 +98,7 @@ export const GetTasks = () => {
           );
         })
       ) : (
-        <p className="col-span-3 border-b-2 border-[#646cff] w-fit text-xl font-semibold">
+        <p className="col-span-3 border-b-2 border-[#646cff] w-fit text-sm md:text-base font-semibold">
           Nothing planned yet – Add a task to get started.
         </p>
       )}

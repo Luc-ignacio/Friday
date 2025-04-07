@@ -40,8 +40,8 @@ function Profile() {
 
   if (userDetails) {
     return (
-      <div className="w-[90%] grid grid-cols-1 md:grid-cols-3 bg-[#343434] shadow-lg px-4 py-8 rounded-lg">
-        <div className="w-[90%] mx-auto col-span-3">
+      <div className="w-[95%] grid grid-cols-1 md:grid-cols-3 bg-[#343434] shadow-lg px-4 py-8 rounded-lg">
+        <div className="w-[95%] mx-auto col-span-3">
           <div className="items-center justify-between pb-6 border-b border-[#1a1a1a]">
             <div className="flex items-center gap-5 pb-3">
               <img src="/friday.png" alt="friday logo" className="w-16" />
@@ -49,10 +49,10 @@ function Profile() {
             </div>
 
             <div className="items-center">
-              <h3 className="text-xl font-semibold">
+              <h3 className="text-lg md:text-xl font-semibold">
                 Welcome {userDetails.firstName} {userDetails.lastName}
               </h3>
-              <p>
+              <p className="text-sm md:text-base">
                 Your weekend plans start here – keep track, stay organised, and
                 make the most of your days off.
               </p>

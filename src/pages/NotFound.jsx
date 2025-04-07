@@ -3,7 +3,7 @@ import { Button } from "../components/button";
 
 export const NotFound = () => {
   return (
-    <div className="flex flex-col w-[500px]">
+    <div className="flex flex-col w-[95vw] md:w-[500px]">
       <img src="/not-found.png" alt="Page Not Found" />
       <Button
         text={"Back to Login"}

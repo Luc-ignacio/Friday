@@ -66,15 +66,15 @@ function EditTask() {
 
   if (userDetails) {
     return (
-      <div className="w-[500px] bg-[#343434] shadow-lg px-4 py-8 rounded-lg">
-        <div className="flex w-[90%] mx-auto items-center justify-center gap-5 pb-6 border-b border-[#1a1a1a]">
+      <div className="w-[95vw] md:w-[500px] bg-[#343434] shadow-lg px-4 py-8 rounded-lg">
+        <div className="flex w-[95%] mx-auto items-center justify-center gap-5 pb-6 border-b border-[#1a1a1a]">
           <img src={logo} alt="friday logo" className="w-16" />
           <div>
             <h1 className="text-6xl font-bold mb-1">Friday</h1>
           </div>
         </div>
 
-        <div className="w-[90%] mx-auto">
+        <div className="w-[95%] mx-auto">
           <div className="items-center justify-between">
             <div className="flex flex-col gap-4 pt-6">
               <h1 className="text-lg font-semibold text-center">
@@ -118,6 +118,12 @@ function EditTask() {
                 text="Edit Task"
                 clicked={() => {
                   editTask(taskId.id);
+                }}
+              />
+              <Button
+                text="Cancel"
+                clicked={() => {
+                  window.location.href = "/profile";
                 }}
               />
             </div>

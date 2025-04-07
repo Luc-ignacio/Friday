@@ -51,15 +51,15 @@ function AddTask() {
 
   if (userDetails) {
     return (
-      <div className="w-[500px] bg-[#343434] shadow-lg px-4 py-8 rounded-lg">
-        <div className="flex w-[90%] mx-auto items-center justify-center gap-5 pb-6 border-b border-[#1a1a1a]">
+      <div className="w-[95vw] md:w-[500px] bg-[#343434] shadow-lg px-4 py-8 rounded-lg">
+        <div className="flex w-full mx-auto items-center justify-center gap-5 pb-6 border-b border-[#1a1a1a]">
           <img src="/friday.png" alt="friday logo" className="w-16" />
           <div>
             <h1 className="text-6xl font-bold mb-1">Friday</h1>
           </div>
         </div>
 
-        <div className="w-[90%] mx-auto">
+        <div className="w-[95%] mx-auto">
           <div className="items-center justify-between">
             <div className="flex flex-col gap-4 pt-6">
               <h1 className="text-lg font-semibold text-center">
@@ -100,6 +100,12 @@ function AddTask() {
               </select>
 
               <Button text="Add Task" clicked={addTask} />
+              <Button
+                text="Cancel"
+                clicked={() => {
+                  window.location.href = "/profile";
+                }}
+              />
             </div>
           </div>
         </div>

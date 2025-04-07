@@ -68,9 +68,9 @@ function Login() {
   };
 
   return (
-    <div className="w-[500px]">
+    <div className="w-[95vw] md:w-[500px]">
       <div className="bg-[#343434] shadow-lg px-4 py-8 rounded-lg text-center">
-        <div className="flex w-[90%] mx-auto text-left items-center justify-between pb-6 border-b border-[#1a1a1a]">
+        <div className="flex w-[95%] mx-auto text-left items-center justify-between pb-6 border-b border-[#1a1a1a]">
           <img src="/friday.png" alt="friday logo" className="w-25" />
           <div>
             <h1 className="text-6xl font-bold mb-1">Friday</h1>
@@ -79,7 +79,7 @@ function Login() {
         </div>
 
         <form
-          className="flex flex-col w-[90%] mx-auto pt-6"
+          className="flex flex-col w-[95%] mx-auto pt-6"
           onSubmit={SignInWithEmail}
         >
           <h1 className="text-xl font-semibold">Welcome back</h1>
@@ -112,7 +112,7 @@ function Login() {
 
         <Button
           clicked={SignUpWithGoogle}
-          customStyle={`mt-6 w-[90%] mx-auto`}
+          customStyle={`mt-6 w-[95%] mx-auto`}
           text="Continue With Google"
           img={
             <img src="/google-logo.png" alt="Google Logo" className="w-10" />
