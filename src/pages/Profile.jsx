@@ -42,10 +42,14 @@ function Profile() {
     return (
       <div className="w-[95%] grid grid-cols-1 md:grid-cols-3 bg-[#343434] shadow-lg px-4 py-8 rounded-lg">
         <div className="w-[95%] mx-auto col-span-3">
-          <div className="items-center justify-between pb-6 border-b border-[#1a1a1a]">
-            <div className="flex items-center gap-5 pb-3">
-              <img src="/friday.png" alt="friday logo" className="w-16" />
-              <h1 className="text-6xl font-bold">Friday</h1>
+          <div className="items-center pb-6 border-b border-[#1a1a1a]">
+            <div className="flex items-center gap-6 pb-3">
+              <img
+                src="/friday.png"
+                alt="friday logo"
+                className="w-15 md:w-20"
+              />
+              <h1 className="text-5xl md:text-6xl font-bold">Friday</h1>
             </div>
 
             <div className="items-center">

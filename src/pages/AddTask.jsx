@@ -52,10 +52,10 @@ function AddTask() {
   if (userDetails) {
     return (
       <div className="w-[95vw] md:w-[500px] bg-[#343434] shadow-lg px-4 py-8 rounded-lg">
-        <div className="flex w-full mx-auto items-center justify-center gap-5 pb-6 border-b border-[#1a1a1a]">
-          <img src="/friday.png" alt="friday logo" className="w-16" />
+        <div className="flex w-full mx-auto items-center justify-center gap-6 pb-6 border-b border-[#1a1a1a]">
+          <img src="/friday.png" alt="friday logo" className="w-15 md:w-20" />
           <div>
-            <h1 className="text-6xl font-bold mb-1">Friday</h1>
+            <h1 className="text-5xl md:text-6xl font-bold mb-1">Friday</h1>
           </div>
         </div>
 
