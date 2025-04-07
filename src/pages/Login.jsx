@@ -71,9 +71,9 @@ function Login() {
     <div className="w-[95vw] md:w-[500px]">
       <div className="bg-[#343434] shadow-lg px-4 py-8 rounded-lg text-center">
         <div className="flex w-[95%] mx-auto text-left items-center justify-between pb-6 border-b border-[#1a1a1a]">
-          <img src="/friday.png" alt="friday logo" className="w-25" />
+          <img src="/friday.png" alt="friday logo" className="w-20 md:w-25" />
           <div>
-            <h1 className="text-6xl font-bold mb-1">Friday</h1>
+            <h1 className="text-4xl md:text-6xl font-bold mb-1">Friday</h1>
             <p className="text">Because weekends deserve better plans</p>
           </div>
         </div>
