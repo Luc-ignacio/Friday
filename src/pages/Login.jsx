@@ -49,6 +49,7 @@ function Login() {
   const SignUpWithGoogle = async () => {
     try {
       await signInWithPopup(auth, googleProvider);
+      const user = auth?.currentUser;
       if (user) {
         [
           await setDoc(doc(db, "users", user.uid), {
