@@ -1,9 +1,10 @@
 import React, { useState } from "react";
-import { auth, googleProvider } from "../firebase-config/firebase.js";
+import { auth, db, googleProvider } from "../firebase-config/firebase.js";
 import { toast } from "react-toastify";
 import { Button } from "../components/button.jsx";
 import { signInWithEmailAndPassword, signInWithPopup } from "firebase/auth";
 import { Link } from "react-router-dom";
+import { doc, setDoc } from "firebase/firestore";
 
 function Login() {
   const [credentials, setCredentials] = useState({
@@ -48,6 +49,16 @@ function Login() {
   const SignUpWithGoogle = async () => {
     try {
       await signInWithPopup(auth, googleProvider);
+      const user = auth?.currentUser;
+      if (user) {
+        [
+          await setDoc(doc(db, "users", user.uid), {
+            email: user.email,
+            firstName: auth?.currentUser.displayName,
+            lastName: "",
+          }),
+        ];
+      }
       window.location.href = "/profile";
       toast.success("User signed in successfully");
     } catch (error) {
