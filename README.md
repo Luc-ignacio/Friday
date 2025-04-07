@@ -39,7 +39,7 @@ To set up the project locally, follow these steps:
 ```sh
 # Clone the repository
 git clone https://github.com/Luc-ignacio/Friday.git
-cd friday
+cd Friday
 
 # Install dependencies
 npm install
