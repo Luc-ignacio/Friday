@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Button } from "../components/button";
 import { auth, db } from "../firebase-config/firebase.js";
-import { toast } from "react-toastify";
+import { toast, ToastContainer } from "react-toastify";
 import { getDoc, doc } from "firebase/firestore";
 import { GetTasks } from "../components/get-tasks.jsx";
 
@@ -41,6 +41,7 @@ function Profile() {
   if (userDetails) {
     return (
       <div className="w-[95%] grid grid-cols-1 md:grid-cols-3 bg-[#343434] shadow-lg px-4 py-8 rounded-lg">
+        <ToastContainer />
         <div className="w-[95%] mx-auto col-span-3">
           <div className="items-center pb-6 border-b border-[#1a1a1a]">
             <div className="flex items-center gap-6 pb-3">

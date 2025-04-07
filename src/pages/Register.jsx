@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { auth, googleProvider, db } from "../firebase-config/firebase.js";
-import { toast } from "react-toastify";
+import { toast, ToastContainer } from "react-toastify";
 import { Button } from "../components/button.jsx";
 import { createUserWithEmailAndPassword, signInWithPopup } from "firebase/auth";
 import { setDoc, doc } from "firebase/firestore";
@@ -100,6 +100,7 @@ function Register() {
 
   return (
     <div className="w-[95vw] md:w-[500px] bg-[#343434] shadow-lg px-4 py-8 rounded-lg">
+      <ToastContainer />
       <div className="flex w-full items-center justify-center gap-6 pb-6 border-b border-[#1a1a1a]">
         <img src="/friday.png" alt="friday logo" className="w-15 md:w-20" />
         <div>

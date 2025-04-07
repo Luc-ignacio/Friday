@@ -4,6 +4,7 @@ import { auth, db } from "../firebase-config/firebase.js";
 import { getDoc, doc, updateDoc } from "firebase/firestore";
 import { useParams } from "react-router-dom";
 import logo from "/friday.png";
+import { ToastContainer } from "react-toastify";
 
 function EditTask() {
   const [userDetails, setUserDetails] = useState(null);
@@ -67,6 +68,7 @@ function EditTask() {
   if (userDetails) {
     return (
       <div className="w-[95vw] md:w-[500px] bg-[#343434] shadow-lg px-4 py-8 rounded-lg">
+        <ToastContainer />
         <div className="flex w-[95%] mx-auto items-center justify-center gap-6 pb-6 border-b border-[#1a1a1a]">
           <img src={logo} alt="friday logo" className="w-15 md:w-20" />
           <div>

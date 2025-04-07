@@ -11,7 +11,7 @@ import {
 } from "firebase/firestore";
 import { Button } from "./button.jsx";
 import { useNavigate } from "react-router-dom";
-import { toast } from "react-toastify";
+import { toast, ToastContainer } from "react-toastify";
 
 export const GetTasks = () => {
   const [tasksList, setTasksList] = useState([]);
@@ -78,6 +78,7 @@ export const GetTasks = () => {
                   {task.priority}
                 </p>
               </div>
+              <ToastContainer />
               <div className="flex flex-col gap-3">
                 <Button
                   text="Edit"

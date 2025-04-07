@@ -2,13 +2,15 @@ import React, { useEffect, useState } from "react";
 import { Button } from "../components/button";
 import { auth, db } from "../firebase-config/firebase.js";
 import { getDoc, doc, addDoc, collection } from "firebase/firestore";
-import { toast } from "react-toastify";
+import { toast, ToastContainer } from "react-toastify";
 
 function AddTask() {
   const [userDetails, setUserDetails] = useState(null);
   const [newTaskTitle, setNewTaskTitle] = useState("");
   const [newTaskDueDate, setNewTaskDueDate] = useState("");
-  const [newTaskPriority, setNewTaskPriority] = useState("Low");
+  const [newTaskPriority, setNewTaskPriority] = useState(
+    "-- Select Task Priority --"
+  );
 
   const tasksReference = collection(db, "tasks");
 
@@ -60,6 +62,7 @@ function AddTask() {
         </div>
 
         <div className="w-[95%] mx-auto">
+          <ToastContainer />
           <div className="items-center justify-between">
             <div className="flex flex-col gap-4 pt-6">
               <h1 className="text-lg font-semibold text-center">
@@ -91,9 +94,10 @@ function AddTask() {
                   setNewTaskPriority(e.target.value);
                 }}
                 value={newTaskPriority}
-                className="bg-gray-300 text-lg text-black px-2 py-1 rounded-lg"
+                className="bg-gray-300 text-gray-500 rounded-lg focus:text-black"
                 name="NewPriority"
               >
+                <option value="">-- Select Task Priority --</option>
                 <option value="Low">Low</option>
                 <option value="Medium">Medium</option>
                 <option value="High">High</option>

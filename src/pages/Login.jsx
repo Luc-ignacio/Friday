@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { auth, db, googleProvider } from "../firebase-config/firebase.js";
-import { toast } from "react-toastify";
+import { toast, ToastContainer } from "react-toastify";
 import { Button } from "../components/button.jsx";
 import { signInWithEmailAndPassword, signInWithPopup } from "firebase/auth";
 import { Link } from "react-router-dom";
@@ -70,14 +70,14 @@ function Login() {
   return (
     <div className="w-[95vw] md:w-[500px]">
       <div className="bg-[#343434] shadow-lg px-4 py-8 rounded-lg text-center">
+        <ToastContainer />
         <div className="flex w-[95%] mx-auto text-left items-center gap-6 pb-6 border-b border-[#1a1a1a]">
           <img src="/friday.png" alt="friday logo" className="w-20 md:w-25" />
           <div>
             <h1 className="text-4xl md:text-6xl font-bold mb-1">Friday</h1>
-            <p className="text">Because weekends deserve better plans</p>
+            <p className="text">Your weekends deserve better plans</p>
           </div>
         </div>
-
         <form
           className="flex flex-col w-[95%] mx-auto pt-6"
           onSubmit={SignInWithEmail}
@@ -109,7 +109,6 @@ function Login() {
             </p>
           </div>
         </form>
-
         <Button
           clicked={SignUpWithGoogle}
           customStyle={`mt-6 w-[95%] mx-auto`}
@@ -118,7 +117,6 @@ function Login() {
             <img src="/google-logo.png" alt="Google Logo" className="w-10" />
           }
         />
-
         <div className="flex gap-1 mt-6 text-sm justify-center">
           <p>Don't have an account?</p>
           <Link
